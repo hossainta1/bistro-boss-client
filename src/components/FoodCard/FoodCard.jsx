@@ -29,11 +29,9 @@ const FoodCard = ({ item }) => {
                         // refetch the update number of items in the cart
                         refetch();
                         Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "Food added on the Cart",
-                            showConfirmButton: false,
-                            timer: 1500
+                            title: "Added Cart",
+                            text: "Your item added successfully.",
+                            icon: "success"
                         });
                     }
                 })
