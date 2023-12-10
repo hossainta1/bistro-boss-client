@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
-import { FaTrashAlt, FaUserShield, FaUsersSlash } from "react-icons/fa";
+import { FaTrashAlt, FaUserShield, } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 const AllUsers = () => {
