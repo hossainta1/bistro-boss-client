@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { FaTrashAlt, FaUserShield, FaUsersSlash } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
     const { data: users = [], refetch } = useQuery({
@@ -13,7 +14,23 @@ const AllUsers = () => {
 
 
 
-    const handleMakeAdmin = id => {
+    const handleMakeAdmin = user => {
+        fetch(`http://localhost:5000/users/admin/${user._id}`, {
+            method: 'PATCH'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${user.name} Is Admin Now!! `,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
 
     };
 
@@ -54,7 +71,7 @@ const AllUsers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.role === 'admin' ? 'admin' :
-                                    <button onClick={() => handleMakeAdmin(user._id)} className="btn btn-ghos bg-orange-400 text-white "><FaUserShield></FaUserShield></button>
+                                    <button onClick={() => handleMakeAdmin(user)} className="btn btn-ghos bg-orange-400 text-white "><FaUserShield></FaUserShield></button>
                                 }</td>
                                 <td>
                                     <button onClick={() => handleDelete(user)} className="btn btn-ghost bg-red-400 text-white "><FaTrashAlt></FaTrashAlt></button>
