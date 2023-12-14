@@ -11,7 +11,7 @@ const Payment = () => {
     return (
         <div className="w-full px-10">
             <SectionTitle subHeading="Please proceed to" heading="Payment"></SectionTitle>
-            <h2 className="text-3xl">Payment hear</h2>
+            <h2 className="text-3xl">Payment Here!!!</h2>
             <Elements stripe={stripePromise}>
                 <CheckoutFrom></CheckoutFrom>
             </Elements>
