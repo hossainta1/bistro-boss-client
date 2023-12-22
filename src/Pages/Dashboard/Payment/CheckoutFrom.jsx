@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProviders";
 
 
+
 const CheckoutFrom = ({ cart, price }) => {
     const stripe = useStripe();
     const elements = useElements();
@@ -80,17 +81,21 @@ const CheckoutFrom = ({ cart, price }) => {
                 email: user?.email,
                 transactionId: paymentIntent.id,
                 price,
+                date: new Date(),
                 quantity: cart.length,
-                items: cart.map(item => item._id),
+                cartItems: cart.map(item => item._id),
+                menuItems: cart.map(item => item.menuItemId),
+                status: 'service pending',
                 itemNames: cart.map(item => item.name),
 
             }
             axiosSecure.post('/payments', payment)
                 .then(res => {
                     console.log(res.data)
-                    if (res.data.insertedId) {
+                    if (res.data.result.insertedId) {
                         // display confirm
                     }
+
                 })
 
 
